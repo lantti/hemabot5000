@@ -1,4 +1,5 @@
 import sklearn.neural_network as sklnn
+import sklearn.linear_model as skll
 import random
 import math
 
@@ -30,8 +31,16 @@ oneHot = {k: [0]*n + [1] + [0]*(len(terms)-1-n) for n, k in enumerate(termKeyOrd
 
 train_X = [oneHot[k] for k in passeggiare] 
 train_y = train_X[1:] + [train_X[-1]]
-net = sklnn.MLPRegressor(hidden_layer_sizes=[5,5], solver='lbfgs', max_iter=2000)
+
+# Simple NN
+net = sklnn.MLPRegressor(hidden_layer_sizes=[25], solver='lbfgs', max_iter=2000)
 net.fit(train_X, train_y)
+
+# Linear regression for comparison
+linreg = skll.LinearRegression()
+linreg.fit(train_X, train_y)
+
+regressor = net
 
 # I couldn't figure out how set output activation to softmax on MLPClassifier,
 # so I roll my own and use  MLPRegressor instead
@@ -39,17 +48,16 @@ def softmax(lst):
 	exps = [math.exp(z) for z in lst]
 	tot = sum(exps)
 	return [e / tot for e in exps]
-	
-	
 
-# Run the prediction one or more times to get a sequence
+
+# Run the regressor prediction one or more times to get a sequence
 # of terms. The prediction output is tested against random numbers
 # to get a random term roughly corresponding to the output distribution
 def step(key, steps=1):
 	nextKey = key
 	seq = []
 	for _ in range(steps):
-		pr = softmax(net.predict([oneHot[nextKey]])[0])
+		pr = softmax(regressor.predict([oneHot[nextKey]])[0])
 		nextKey = random.choices(termKeyOrder, weights=pr, k=1)[0]
 		seq.append(nextKey)
 	return seq
