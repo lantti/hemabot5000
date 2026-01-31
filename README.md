@@ -24,7 +24,14 @@ Although there are a good number of such treatises surviving and they contain hu
 
 ## How is it used?
 
-The model can serve as a training tool for a HEMA practitioner by generating additional training sequences once the sequences from the primary sources are becoming too familiar. Alternatively a variant of the model could be used to give an "in-styleness" grade for the practitioners own sequences. Just training the model and evaluating if the generated sequences make sense at all or fit a particular style is an extremely valuable exercise in itself, not only for understanding AI but also for understanding HEMA. 
+The model can serve as a training tool for a HEMA practitioner by generating additional training sequences once the sequences from the primary sources are becoming too familiar. Alternatively a variant of the model could be used to give an "in-styleness" grade for the practitioners own sequences. Just training the model and evaluating if the generated sequences make sense at all or fit a particular style is an extremely valuable exercise in itself, not only for understanding AI but also for understanding HEMA.
+
+Example of use for the simpleNN.py:
+```
+$ python -i simpleNN.py 
+>>> sequence(10)
+['Coda Lunga Larga', 'Mandritto Tramazzone', "Guardia d'Entrare", 'Coda Lunga Stretta', 'Mezzo Mandritto', 'Riverso Tondo', 'Riverso Tramazzone', 'Riverso Sgualimbro', 'Mezzo Mandritto', 'Mandritto Tramazzone']
+```
 
 ## Challenges
 
