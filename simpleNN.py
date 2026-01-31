@@ -1,5 +1,6 @@
-from sklearn.neural_network import MLPRegressor
+import sklearn.neural_network as sklnn
 import random
+import math
 
 # Various Bolognese fencing terms mostly following Giovanni dall'Agocchie
 guards = {"ga":"Guardia Alta", "gac":"Guardia d'Alicorno", "ge":"Guardia d'Entrare", "gf":"Guardia di Faccia", "gt":"Guardia di Testa",
@@ -29,24 +30,28 @@ oneHot = {k: [0]*n + [1] + [0]*(len(terms)-1-n) for n, k in enumerate(termKeyOrd
 
 train_X = [oneHot[k] for k in passeggiare] 
 train_y = train_X[1:] + [train_X[-1]]
-regr = MLPRegressor(hidden_layer_sizes=[5,5])
-regr.fit(train_X, train_y)
+net = sklnn.MLPRegressor(hidden_layer_sizes=[5,5], solver='lbfgs', max_iter=2000)
+net.fit(train_X, train_y)
 
-# Run the Regressor prediction one or more times to get a sequence
+# I couldn't figure out how set output activation to softmax on MLPClassifier,
+# so I roll my own and use  MLPRegressor instead
+def softmax(lst):
+	exps = [math.exp(z) for z in lst]
+	tot = sum(exps)
+	return [e / tot for e in exps]
+	
+	
+
+# Run the prediction one or more times to get a sequence
 # of terms. The prediction output is tested against random numbers
 # to get a random term roughly corresponding to the output distribution
 def step(key, steps=1):
 	nextKey = key
 	seq = []
 	for _ in range(steps):
-		pr = regr.predict([oneHot[nextKey]])
-		pr = pr[0]
-		nextKey = ""
-		while nextKey == "":
-			n = random.randrange(0,len(oneHot))
-			if pr[n] > random.random():
-				nextKey = termKeyOrder[n]
-				seq.append(nextKey)
+		pr = softmax(net.predict([oneHot[nextKey]])[0])
+		nextKey = random.choices(termKeyOrder, weights=pr, k=1)[0]
+		seq.append(nextKey)
 	return seq
 	
 # Get a sequence in human readable format using the function "step"
