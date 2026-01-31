@@ -6,6 +6,8 @@ Final project for the Building AI course
 
 A machine learning solution for generating and evaluating sequences of swordplay actions in the style of historical European fencing treatises from the 15th and 16th century.
 
+Current Status: Added a simple feed-forward neural network to generate sequences. Currently trained only with one short sequence. Next steps: type in more training sequences, evaluate if the generated sequences have some sense to them, at least slightly more than a purely random choice.
+
 ## Background
 
 Several Italian and German fencing treatises from the 15th and 16th centuries use as a pedagogical device a series of choreographed example plays where the movements are described with the help of named guard positions and named actions. The guard positions represent postures at specific instants in the flow of the actions, for example a snippet of a play:  
