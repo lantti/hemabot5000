@@ -6,7 +6,7 @@ Final project for the Building AI course
 
 A machine learning solution for generating and evaluating sequences of swordplay actions in the style of historical European fencing treatises from the 15th and 16th century.
 
-Current Status: Added a simple feed-forward neural network to generate sequences. Currently trained only with one short sequence. Next steps: type in more training sequences, evaluate if the generated sequences have some sense to them, at least slightly more than a purely random choice.
+Current Status: Added a simple feed-forward neural network and a simple Markov chain to generate sequences. Currently trained only with one short sequence. Next steps: type in more training sequences, evaluate if the generated sequences have some sense to them, at least slightly more than a purely random choice.
 
 ## Background
 
