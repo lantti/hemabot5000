@@ -43,6 +43,6 @@ The first stages of the project are going to be pre-processing training data fro
 
 ## Acknowledgments
 
-Although at this point there is not a single line of code to show, my initial experiments are done with scikit-learn and it is most likely I will continue to use it throughout the project.
+My initial experiments are done with scikit-learn and it is most likely I will continue to use it throughout the project.
 
 The actual fencing knowledge embedded in the sequences is the result of hard work in dangerous conditions by the respective fencing masters, their students and everybody who partecipated in the duelling culture of the old Europe.
